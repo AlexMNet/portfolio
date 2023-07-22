@@ -14,9 +14,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className="min-h-screen">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {children}
+          <div className="relative flex min-h-screen flex-col">
+            <div>Header</div>
+            <div className="flex-1">{children}</div>
+            <div>Footer</div>
+          </div>
         </ThemeProvider>
       </body>
     </html>

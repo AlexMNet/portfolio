@@ -30,109 +30,96 @@ const getAccessToken = async () => {
 
 //Do not throw error if API fails. Instead, return isPlaying: false so that the UI can render the last played song
 const getNowPlaying = async () => {
-  try {
-    const { access_token } = await getAccessToken();
+  const { access_token } = await getAccessToken();
 
-    const response = await fetch(NOW_PLAYING_ENDPOINT, {
-      headers: {
-        Authorization: `Bearer ${access_token}`,
-      },
-    });
+  const response = await fetch(NOW_PLAYING_ENDPOINT, {
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
 
-    if (response.status === 204 || response.status > 400) {
-      return { isPlaying: false };
-    }
-
-    const song = await response.json();
-
-    if (song.is_playing === false) {
-      return { isPlaying: false };
-    }
-
-    //Consider handling podcasts differently if Podcast data becomes available
-    if (song.currently_playing_type === 'episode' && song.is_playing === true) {
-      const type = 'podcast';
-      const isPlaying = false;
-      return { type, isPlaying };
-    }
-
-    if (song.currently_playing_type === 'track') {
-      const artists = song.item.artists;
-      const isPlaying = song.is_playing;
-      const title = song.item.name;
-      const artist = song.item.artists
-        .map((_artist: any) => _artist.name)
-        .join(', ');
-      const album = song.item.album.name;
-      const albumImageUrl = song.item.album.images[0].url;
-      const songUrl = song.item.external_urls.spotify;
-      return {
-        album,
-        albumImageUrl,
-        artist,
-        isPlaying,
-        songUrl,
-        title,
-        artists,
-      };
-    }
-  } catch (error) {
+  if (response.status === 204 || response.status > 400) {
     return { isPlaying: false };
+  }
+
+  const song = await response.json();
+
+  if (song.is_playing === false) {
+    return { isPlaying: false };
+  }
+
+  //Consider handling podcasts differently if Podcast data becomes available
+  if (song.currently_playing_type === 'episode' && song.is_playing === true) {
+    const type = 'podcast';
+    const isPlaying = false;
+    return { type, isPlaying };
+  }
+
+  if (song.currently_playing_type === 'track') {
+    const artists = song.item.artists;
+    const isPlaying = song.is_playing;
+    const title = song.item.name;
+    const artist = song.item.artists
+      .map((_artist: any) => _artist.name)
+      .join(', ');
+    const album = song.item.album.name;
+    const albumImageUrl = song.item.album.images[0].url;
+    const songUrl = song.item.external_urls.spotify;
+    return {
+      album,
+      albumImageUrl,
+      artist,
+      isPlaying,
+      songUrl,
+      title,
+      artists,
+    };
   }
 };
 
 const getRecentlyPlayed = async () => {
-  try {
-    const { access_token } = await getAccessToken();
+  const { access_token } = await getAccessToken();
 
-    const response = await fetch(RECENTLY_PLAYED, {
-      headers: {
-        Authorization: `Bearer ${access_token}`,
-      },
-    });
+  const response = await fetch(RECENTLY_PLAYED, {
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
 
-    if (response.status === 204 || response.status > 400) {
-      throw new Error('Error getting recently played songs');
-    }
-
-    const songs = await response.json();
-    const album = songs.items[0].track.album.name;
-    const albumImageUrl = songs.items[0].track.album.images[0].url;
-    const title = songs.items[0].track.name;
-    const songUrl = songs.items[0].track.external_urls.spotify;
-    const artists = songs.items[0].track.artists;
-    const artist = songs.items[0].track.artists;
-    const isPlaying = false;
-
-    return {
-      title,
-      songUrl,
-      artists,
-      albumImageUrl,
-      album,
-      artist,
-      isPlaying,
-    };
-  } catch (error) {
+  if (response.status === 204 || response.status > 400) {
     throw new Error('Error getting recently played songs');
   }
+
+  const songs = await response.json();
+  const album = songs.items[0].track.album.name;
+  const albumImageUrl = songs.items[0].track.album.images[0].url;
+  const title = songs.items[0].track.name;
+  const songUrl = songs.items[0].track.external_urls.spotify;
+  const artists = songs.items[0].track.artists;
+  const artist = songs.items[0].track.artists;
+  const isPlaying = false;
+
+  return {
+    title,
+    songUrl,
+    artists,
+    albumImageUrl,
+    album,
+    artist,
+    isPlaying,
+  };
 };
 
 export async function GET(req: Request, res: Response) {
-  try {
-    const response = await getNowPlaying();
+  const response = await getNowPlaying();
 
-    if (response?.isPlaying === true) {
-      return NextResponse.json(response, { status: 200 });
-    }
+  if (response?.isPlaying === true) {
+    return NextResponse.json(response, { status: 200 });
+  }
 
-    if (response?.isPlaying === false) {
-      const res = await getRecentlyPlayed();
+  if (response?.isPlaying === false) {
+    const res = await getRecentlyPlayed();
 
-      return NextResponse.json(res, { status: 200 });
-    }
-  } catch (error) {
-    console.log('Currently playing error: ', error);
-    return NextResponse.error();
+    return NextResponse.json(res, { status: 200 });
   }
 }

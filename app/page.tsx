@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <main className="h-100 flex flex-col w-full max-w-6xl mx-auto items-center justify-start px-4">
       <div className="flex justify-center items-center flex-col text-start ">
-        <article className="max-w-lg">
+        <article className="max-w-2xl">
           <Typography variant="h6" weight="light" className="text-blue-500">
             Software Developer
           </Typography>

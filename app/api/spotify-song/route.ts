@@ -111,6 +111,7 @@ const getRecentlyPlayed = async () => {
 };
 
 export async function GET(req: Request, res: Response) {
+  const url = req.url;
   const response = await getNowPlaying();
 
   if (response?.isPlaying === true) {

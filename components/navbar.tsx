@@ -2,7 +2,7 @@ import { ModeToggle } from './mode-toggle';
 export function Navbar() {
   return (
     <>
-      <div className="w-full h-4 dark:bg-slate-500 bg-black"></div>
+      {/* <div className="w-full h-4 dark:bg-slate-500 bg-black"></div> */}
       <div className="mx-auto w-full max-w-5xl py-12 px-4">
         <nav className="flex items-center justify-center sm:justify-between">
           <div className="hidden sm:block">AlexMaldonado.DEV</div>

@@ -1,5 +1,5 @@
 import { Typography } from '@/components/ui/typography';
-import { SpotifyBanner } from '@/components/spotify-banner';
+import { Spotify } from '@/components/spotify';
 import { SocialMedia } from '@/components/social-media';
 
 export default function Home() {
@@ -19,11 +19,13 @@ export default function Home() {
           </Typography>
           <Typography variant="p" weight="light">
             I currently work fulltime for Sandals Church where I build new and
-            maintain existing React and Next.js applications.
+            maintain existing React/Next.js applications.
           </Typography>
 
           <SocialMedia />
-          <SpotifyBanner />
+          <div className="my-4">
+            <Spotify />
+          </div>
         </article>
       </div>
     </main>

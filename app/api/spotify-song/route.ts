@@ -29,7 +29,7 @@ const getAccessToken = async () => {
 };
 
 //Do not throw error if API fails. Instead, return isPlaying: false so that the UI can render the last played song
-export const getNowPlaying = async () => {
+const getNowPlaying = async () => {
   try {
     const { access_token } = await getAccessToken();
 
@@ -81,7 +81,7 @@ export const getNowPlaying = async () => {
   }
 };
 
-export const getRecentlyPlayed = async () => {
+const getRecentlyPlayed = async () => {
   try {
     const { access_token } = await getAccessToken();
 

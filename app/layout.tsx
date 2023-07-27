@@ -1,7 +1,8 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { ThemeProvider } from '@/components/theme-provder';
-import AuthProvider from './context/AuthProvider';
+import AuthProvider from './providers/AuthProvider';
+import ToasterProvider from './providers/ToasterProvider';
 
 export const metadata: Metadata = {
   title: 'Alex Maldonado - Software Engineer',
@@ -18,6 +19,7 @@ export default function RootLayout({
       <body className="min-h-screen">
         <AuthProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <ToasterProvider />
             <div>{children}</div>
           </ThemeProvider>
         </AuthProvider>

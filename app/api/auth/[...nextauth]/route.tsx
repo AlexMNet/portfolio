@@ -7,7 +7,7 @@ import bcrypt from 'bcrypt';
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
   pages: {
-    error: '/auth/error',
+    signIn: '/auth/signin',
   },
   providers: [
     CredentialsProvider({
@@ -17,6 +17,12 @@ export const authOptions: AuthOptions = {
         password: { label: 'password', type: 'password' },
       },
       async authorize(credentials) {
+        const userCount = await prisma.user.count();
+
+        if (userCount === 0) {
+          throw new Error('No user found, please register first');
+        }
+
         if (!credentials?.email || !credentials?.password) {
           throw new Error('Invalid credentials');
         }

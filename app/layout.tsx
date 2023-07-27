@@ -1,8 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { ThemeProvider } from '@/components/theme-provder';
-import { Navbar } from '@/components/navbar';
-import { Footer } from '@/components/footer';
+import AuthProvider from './context/AuthProvider';
 
 export const metadata: Metadata = {
   title: 'Alex Maldonado - Software Engineer',
@@ -17,13 +16,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="relative flex min-h-screen flex-col">
-            <Navbar />
-            <div className="flex-1 flex">{children}</div>
-            <Footer />
-          </div>
-        </ThemeProvider>
+        <AuthProvider>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <div>{children}</div>
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   );

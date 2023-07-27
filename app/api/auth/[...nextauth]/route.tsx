@@ -8,6 +8,7 @@ export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
   pages: {
     signIn: '/auth/signin',
+    error: '/auth/signin',
   },
   providers: [
     CredentialsProvider({

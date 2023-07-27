@@ -29,7 +29,7 @@ export function Navbar() {
     <>
       {session?.user && (
         <div className="w-full h-4 dark:bg-slate-500 bg-black flex items-center justify-center py-4 gap-2">
-          <Typography variant="p" weight="light">
+          <Typography variant="p" weight="light" className="text-white">
             Welcome: {session?.user?.name}!
           </Typography>
           <Badge variant="secondary">Admin mode</Badge>
@@ -57,16 +57,28 @@ export function Navbar() {
                   </NavigationMenuItem>
                 ))}
                 {session?.user && (
-                  <NavigationMenuItem>
-                    <Button
-                      variant="outline"
-                      className="bg-red-500"
-                      size="sm"
-                      onClick={() => signOut({ callbackUrl: '/' })}
-                    >
-                      <LogOut size={16} />
-                    </Button>
-                  </NavigationMenuItem>
+                  <>
+                    <NavigationMenuItem>
+                      <Link href="/admin" legacyBehavior passHref>
+                        <NavigationMenuLink
+                          active={pathname === '/admin'}
+                          className={navigationMenuTriggerStyle()}
+                        >
+                          Admin
+                        </NavigationMenuLink>
+                      </Link>
+                    </NavigationMenuItem>
+                    <NavigationMenuItem>
+                      <Button
+                        variant="outline"
+                        className="bg-red-500"
+                        size="sm"
+                        onClick={() => signOut({ callbackUrl: '/' })}
+                      >
+                        <LogOut size={16} />
+                      </Button>
+                    </NavigationMenuItem>
+                  </>
                 )}
               </NavigationMenuList>
             </NavigationMenu>

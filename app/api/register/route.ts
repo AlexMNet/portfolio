@@ -8,7 +8,10 @@ export async function POST(req: Request) {
   const { email, name, password } = body;
 
   if (email !== process.env.NEXTAUTH_ADMIN_EMAIL) {
-    throw new Error('You are not authorized to register.');
+    return NextResponse.json(
+      { error: 'You are not authorized to register.' },
+      { status: 401 }
+    );
   }
 
   const hashedPassword = await bcrypt.hash(password, 12);

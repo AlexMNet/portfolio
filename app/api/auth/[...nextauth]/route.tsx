@@ -7,7 +7,7 @@ import bcrypt from 'bcrypt';
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
   pages: {
-    newUser: '/auth/new-user',
+    error: '/auth/error',
   },
   providers: [
     CredentialsProvider({
@@ -25,12 +25,14 @@ export const authOptions: AuthOptions = {
           where: { email: credentials.email },
         });
 
-        if (user?.email !== process.env.NEXTAUTH_ADMIN_EMAIL) {
-          throw new Error('You are not the ownder of this site');
-        }
-
         if (!user || !user.hashedPassword) {
           throw new Error('Invalid credentials');
+        }
+
+        if (user?.email !== process.env.NEXTAUTH_ADMIN_EMAIL) {
+          throw new Error(
+            'You are not the owner of this site or your credentials are invalid'
+          );
         }
 
         const isValidPassword = await bcrypt.compare(

@@ -21,7 +21,7 @@ import {
 import { Input } from '../ui/input';
 import { Typography } from '../ui/typography';
 import { useState } from 'react';
-import { Loader2 } from 'lucide-react';
+import { Eye, EyeOff, Loader2 } from 'lucide-react';
 
 const formSchema = z.object({
   email: z
@@ -36,6 +36,7 @@ const formSchema = z.object({
 
 export default function RegisterForm() {
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -69,7 +70,7 @@ export default function RegisterForm() {
   }
 
   return (
-    <div className="border rounded-md p-4 max-w-md w-full">
+    <div className="border rounded-md p-4 max-w-sm w-full">
       <div className="my-4">
         <Typography variant="h3" weight="bold">
           Register{' '}
@@ -112,9 +113,24 @@ export default function RegisterForm() {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input placeholder="dina1234" {...field} />
+                  <div className="relative">
+                    <Input
+                      type={showPassword ? 'text' : 'password'}
+                      placeholder="dina1234"
+                      {...field}
+                    />
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute top-0 right-0"
+                    >
+                      {showPassword ? <Eye /> : <EyeOff />}
+                    </Button>
+                  </div>
                 </FormControl>
-                <FormDescription>Enter your email</FormDescription>
+                <FormDescription>Enter your password</FormDescription>
                 <FormMessage />
               </FormItem>
             )}

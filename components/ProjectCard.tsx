@@ -19,10 +19,10 @@ export default function ProjectCard({
   return (
     <Link
       href="#"
-      className="max-w-sm w-full lg:max-w-full lg:flex border rounded-md dark:shadow-none shadow hover:scale-105 transition"
+      className=" w-full flex border rounded-md dark:shadow-none shadow"
     >
       <div
-        className="lg:h-auto hidden lg:w-56 flex-none bg-center bg-cover rounded-l-md text-center overflow-hidden  lg:block"
+        className="lg:h-auto hidden  flex-none bg-center bg-cover rounded-l-md text-center overflow-hidden  lg:block"
         style={{
           backgroundImage: `url('${image}')`,
         }}

@@ -1,12 +1,10 @@
-// import { PrismaAdapter } from '@next-auth/prisma-adapter';
-import { PrismaAdapter } from '@auth/prisma-adapter';
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import NextAuth, { AuthOptions } from 'next-auth';
 import prisma from '@/app/libs/prismadb';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcrypt';
 
 export const authOptions: AuthOptions = {
-  // @ts-ignore
   adapter: PrismaAdapter(prisma),
   pages: {
     signIn: '/auth/signin',

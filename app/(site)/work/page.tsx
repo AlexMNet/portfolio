@@ -55,7 +55,7 @@ const projects: {
   },
 ];
 
-export default function Projects() {
+export default function Work() {
   return (
     <main className="h-100 flex flex-col w-full max-w-2xl mx-auto items-center justify-start lg:px-0 px-4">
       <div className="flex justify-center items-start flex-col w-full ">

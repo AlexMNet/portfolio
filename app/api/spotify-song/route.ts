@@ -111,20 +111,16 @@ const getRecentlyPlayed = async () => {
 };
 
 export async function GET(req: Request, res: Response) {
-  try {
-    const url = req.url;
-    const response = await getNowPlaying();
+  const url = req.url;
+  const response = await getNowPlaying();
 
-    if (response?.isPlaying === true) {
-      return NextResponse.json(response, { status: 200 });
-    }
+  if (response?.isPlaying === true) {
+    return NextResponse.json(response, { status: 200 });
+  }
 
-    if (response?.isPlaying === false) {
-      const res = await getRecentlyPlayed();
+  if (response?.isPlaying === false) {
+    const res = await getRecentlyPlayed();
 
-      return NextResponse.json(res, { status: 200 });
-    }
-  } catch (error) {
-    console.log(error);
+    return NextResponse.json(res, { status: 200 });
   }
 }

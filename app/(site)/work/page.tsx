@@ -1,5 +1,4 @@
 import { Typography } from '@/components/ui/typography';
-import ProjectCard from '@/components/ProjectCard';
 
 const projects: {
   title: string;
@@ -11,28 +10,28 @@ const projects: {
   github_link?: string;
 }[] = [
   {
-    title: 'Learning Management System',
+    title: 'Sandals Next',
     description:
       'This is a learning management system that I built for Sandals Church to serve learning content to their staff and memebers',
-    image: '/lms.png',
+    image: '/sandals-next.png',
     type: 'Frontend',
     technologies: ['Next.js', 'TailwindCSS', 'Redux Toolkit', 'Auth'],
     live_link: 'https://learn.sandalschurch.com',
   },
   {
-    title: 'Sermons Microsite',
+    title: 'Sandals - LMS',
     description:
       'A microsite created for Sandals Church to serve weekly sermon content. Highlight feature is a search/filter page.',
-    image: '/sermons.png',
+    image: '/sandals-learn.png',
     type: 'Frontend',
     technologies: ['Next.js', 'TailwindCSS', 'Zustand', 'SWR'],
     live_link: 'https://watch.sandalschurch.com/watch',
   },
   {
-    title: 'Dev Portfolio',
+    title: 'Portfolio',
     description:
       'A microsite created for Sandals Church to serve weekly sermon content. Highlight feature is a search/filter page.',
-    image: '/dev-site.png',
+    image: '/portfolio.png',
     type: 'Fullstack',
     technologies: [
       'Next.js',
@@ -44,33 +43,51 @@ const projects: {
     ],
     live_link: 'https://new.alexmaldonado.dev',
   },
-  {
-    title: 'Spotify API Refresh Token Tool',
-    description:
-      'A microsite created for Sandals Church to serve weekly sermon content. Highlight feature is a search/filter page.',
-    image: '/dev-site.png',
-    type: 'FullStack',
-    technologies: ['Next.js', 'TailwindCSS'],
-    live_link: 'https://new.alexmaldonado.dev',
-  },
 ];
 
 export default function Work() {
   return (
-    <main className="h-100 flex flex-col w-full max-w-2xl mx-auto items-center justify-start lg:px-0 px-4">
-      <div className="flex justify-center items-start flex-col w-full ">
-        <article className="max-w-2xl text-left">
-          <Typography variant="h1" weight="bold" className="text-start">
-            Projects.
+    <div className="h-full w-full">
+      <div className="max-w-7xl w-full mx-auto px-6">
+        <div className="">
+          <Typography
+            variant="h3"
+            weight="bold"
+            className="mt-2 tracking-tighter underline text-docoration-thick decoration-double decoration-gray-400"
+          >
+            Latest work
           </Typography>
-          <div className="flex flex-wrap gap-3 my-6">
-            {/* Card */}
-            {projects.map((project) => (
-              <ProjectCard key={project.title} project={project} />
-            ))}
-          </div>
-        </article>
+        </div>
+
+        {/* Image Gallery */}
+        <div className="w-full mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+          {projects.map(({ image, title, type }) => (
+            <a href="#" key={title}>
+              <div className="max-w-sm">
+                <div>
+                  <img
+                    className="aspect-[4/5] w-full h-full rounded-sm ring ring-black object-cover"
+                    src={image}
+                    alt="Work"
+                  />
+                </div>
+                <div>
+                  <Typography
+                    variant="h4"
+                    weight="bold"
+                    className="mt-2 text-gray-700 dark:text-gray-100"
+                  >
+                    {title}
+                  </Typography>
+                  <Typography variant="smallText" className="text-gray-500">
+                    {type}
+                  </Typography>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
       </div>
-    </main>
+    </div>
   );
 }

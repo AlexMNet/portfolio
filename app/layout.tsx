@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { ThemeProvider } from '@/components/theme-provder';
 import AuthProvider from './providers/AuthProvider';
 import ToasterProvider from './providers/ToasterProvider';
+import ProjectModal from '@/components/project-modal';
 
 export const metadata: Metadata = {
   title: 'Alex Maldonado - Software Engineer',
@@ -16,11 +17,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen">
+      <body>
         <AuthProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <ToasterProvider />
-            <div>{children}</div>
+            <ProjectModal />
+            {children}
           </ThemeProvider>
         </AuthProvider>
       </body>

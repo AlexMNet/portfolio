@@ -1,29 +1,12 @@
-import { Typography } from '@/components/ui/typography';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
-import { getServerSession } from 'next-auth';
+import prismadb from '@/app/libs/prismadb';
+import { redirect } from 'next/navigation';
 
-export default async function Admin() {
-  const session = await getServerSession(authOptions);
+export default async function Index() {
+  const projects = await prismadb.project.findMany({});
 
-  if (!session) {
-    return (
-      <div>
-        <Typography variant="h1" weight="bold">
-          Admin Page
-        </Typography>
-      </div>
-    );
+  if (projects.length > 0) {
+    redirect(`/admin/${projects[0].slug}`);
   }
 
-  return (
-    <main className="h-100 flex flex-col w-full max-w-2xl mx-auto items-center justify-start lg:px-0 px-4">
-      <div className="flex justify-center items-start flex-col w-full ">
-        <article className="max-w-2xl text-left">
-          <Typography variant="h1" weight="bold" className="text-start">
-            Admin.
-          </Typography>
-        </article>
-      </div>
-    </main>
-  );
+  return <div className="pb-10">dash content</div>;
 }

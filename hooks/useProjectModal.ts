@@ -1,23 +1,11 @@
 import { create } from 'zustand';
-
-type ProjectData = {
-  id?: string;
-  title: string;
-  image1: string;
-  image2?: string;
-  description: string;
-  type: string;
-  technologies: string;
-  live_link: string;
-  github_link: string;
-};
-
+import type { Project } from '@/types';
 interface ProjectModalStore {
   isOpen: boolean;
   onOpen: () => void;
   onClose: () => void;
   setData: (data: any) => void;
-  data: ProjectData | null;
+  data: Project | null;
 }
 
 const useProjectModal = create<ProjectModalStore>((set) => ({

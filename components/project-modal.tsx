@@ -4,6 +4,7 @@ import { DisplayModal } from './ui/modal';
 import { Typography } from './ui/typography';
 import { Button } from './ui/button';
 import { ExternalLink, Github } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
 
 export default function ProjectModal() {
   const { data, isOpen, onClose } = useProjectModal();
@@ -12,13 +13,13 @@ export default function ProjectModal() {
   if (!data) return null;
 
   const {
-    image1,
     title,
-    type,
-    description,
-    technologies,
-    live_link,
+    markdown,
     github_link,
+    live_link,
+    technologies,
+    images,
+    type,
   } = data;
 
   const body = (
@@ -26,7 +27,7 @@ export default function ProjectModal() {
       <div>
         <img
           className="w-full object-cover rounded-lg aspect-video"
-          src={image1}
+          src={images[0].src}
           alt={`${title} image`}
         />
       </div>
@@ -42,27 +43,38 @@ export default function ProjectModal() {
           <span className="text-gray-500">{type}</span>
         </div>
         <div className="mt-2 flex gap-2">
-          <Button variant="outline" size="sm" asChild>
-            <a href={github_link} target="_blank">
-              <Github />
-            </a>
-          </Button>
-          <Button variant="outline" size="sm" asChild>
-            <a href={live_link} target="_blank">
-              <ExternalLink />
-            </a>
-          </Button>
+          {github_link && (
+            <Button variant="outline" size="sm" asChild>
+              <a href={github_link} target="_blank">
+                <Github />
+              </a>
+            </Button>
+          )}
+          {live_link && (
+            <Button variant="outline" size="sm" asChild>
+              <a href={live_link} target="_blank">
+                <ExternalLink />
+              </a>
+            </Button>
+          )}
         </div>
-        <div className="mt-2">
-          <Typography variant="p" className="text-gray-700 dark:text-white/70">
-            {description}
-          </Typography>
-        </div>
+        {markdown && (
+          <div className="mt-2">
+            <Typography
+              variant="p"
+              className="text-gray-700 dark:text-white/70"
+            >
+              <ReactMarkdown className="prose dark:prose-invert">
+                {markdown}
+              </ReactMarkdown>
+            </Typography>
+          </div>
+        )}
         <div className="mt-2">
           <Typography>Technologies:</Typography>
           <ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
-            {technologies.split(',').map((tech) => (
-              <li key={tech}>{tech}</li>
+            {technologies.map(({ id, name }: { id: string; name: string }) => (
+              <li key={id}>{name}</li>
             ))}
           </ul>
         </div>

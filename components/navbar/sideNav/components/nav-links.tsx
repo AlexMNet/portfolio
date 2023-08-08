@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Typography } from '@/components/ui/typography';
 import { usePathname } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
+import path from 'path';
 
 const links: { title: string; href: string }[] = [
   { title: 'Home', href: '/' },
@@ -15,6 +16,7 @@ const links: { title: string; href: string }[] = [
 export default function NavLinks() {
   const pathname = usePathname();
   const { data: session } = useSession();
+  console.log(pathname);
 
   return (
     <div className="w-full flex flex-col items-center justify-center my-6">
@@ -37,7 +39,7 @@ export default function NavLinks() {
               <Button variant="link" size="lg" asChild>
                 <Link
                   href={'/admin'}
-                  className={pathname === '/admin' ? 'underline' : ''}
+                  className={pathname.startsWith('/admin') ? 'underline' : ''}
                 >
                   <Typography variant="largeText">Admin</Typography>
                 </Link>

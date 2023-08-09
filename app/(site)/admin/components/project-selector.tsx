@@ -48,7 +48,8 @@ export default function ProjectSelector({ projects }: ProjectSelectorProps) {
           aria-expanded={open}
           aria-label="Select a project"
         >
-          {currentProject?.title || 'Select a project'}
+          {currentProject?.title ||
+            (projects.length === 0 ? 'Add project' : 'Select a project')}
           <ChevronsUpDown className="ml-auto h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>

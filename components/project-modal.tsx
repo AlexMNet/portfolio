@@ -60,14 +60,9 @@ export default function ProjectModal() {
         </div>
         {markdown && (
           <div className="mt-2">
-            <Typography
-              variant="p"
-              className="text-gray-700 dark:text-white/70"
-            >
-              <ReactMarkdown className="prose dark:prose-invert">
-                {markdown}
-              </ReactMarkdown>
-            </Typography>
+            <ReactMarkdown className="prose dark:prose-invert">
+              {markdown}
+            </ReactMarkdown>
           </div>
         )}
         <div className="mt-2">

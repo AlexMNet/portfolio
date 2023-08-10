@@ -3,7 +3,7 @@ import useProjectModal from '@/hooks/useProjectModal';
 import { DisplayModal } from './ui/modal';
 import { Typography } from './ui/typography';
 import { Button } from './ui/button';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink, Github, ImageOff } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 
 export default function ProjectModal() {
@@ -25,11 +25,20 @@ export default function ProjectModal() {
   const body = (
     <div className="flex flex-col w-full px-4 mt-4">
       <div>
-        <img
-          className="w-full object-cover rounded-lg aspect-video"
-          src={images[0].src}
-          alt={`${title} image`}
-        />
+        {images.length > 0 ? (
+          <img
+            className="w-full object-cover rounded-lg aspect-video"
+            src={images[0].src}
+            alt={`${title} image`}
+          />
+        ) : (
+          <div className="w-full rounded-lg aspect-video bg-gray-500 flex flex-col items-center justify-center">
+            <ImageOff size={100} />
+            <Typography variant="smallText" className="mt-2 ">
+              Opps no image!
+            </Typography>
+          </div>
+        )}
       </div>
       <div>
         <div className="flex items-center gap-2 mt-2">

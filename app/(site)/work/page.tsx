@@ -1,14 +1,20 @@
 import { Typography } from '@/components/ui/typography';
 import ProjectGrid from './components/ProjectGrid';
-import prismadb from '@/app/libs/prismadb';
+import { HOST_URL } from '@/config';
+
+async function getProjects() {
+  const res = await fetch(`${HOST_URL}/api/projects`, {
+    next: { revalidate: 60 },
+  });
+
+  if (!res.ok) {
+    throw new Error(res.statusText);
+  }
+  return res.json();
+}
 
 export default async function Work() {
-  const projects = await prismadb.project.findMany({
-    include: {
-      technologies: true,
-      images: true,
-    },
-  });
+  const projects = await getProjects();
 
   return (
     <div className="pb-10">

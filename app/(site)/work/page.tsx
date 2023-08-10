@@ -5,7 +5,7 @@ import { cache } from 'react';
 
 export const revalidate = 60;
 
-export const getProjects = cache(async () => {
+const getProjects = cache(async () => {
   const response = await prismadb.project.findMany({
     include: {
       technologies: true,

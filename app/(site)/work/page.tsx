@@ -3,21 +3,15 @@ import ProjectGrid from './components/ProjectGrid';
 import prismadb from '@/app/libs/prismadb';
 import { cache } from 'react';
 
-export const revalidate = 60;
+export const revalidate = 0;
 
-const getProjects = cache(async () => {
-  const response = await prismadb.project.findMany({
+export default async function Work() {
+  const projects = await prismadb.project.findMany({
     include: {
       technologies: true,
       images: true,
     },
   });
-
-  return response;
-});
-
-export default async function Work() {
-  const projects = await getProjects();
   return (
     <div className="pb-10">
       <div className="max-w-7xl w-full mx-auto px-6">

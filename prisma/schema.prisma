@@ -36,6 +36,7 @@ model Project {
   youtube_link String?
   github_link String?
   live_link String?
+  published Boolean @default(false)
   updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
 

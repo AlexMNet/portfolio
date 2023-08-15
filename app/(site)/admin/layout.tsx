@@ -2,6 +2,8 @@ import { Typography } from '@/components/ui/typography';
 import prismadb from '@/app/libs/prismadb';
 import ProjectSelector from './components/project-selector';
 
+export const revalidate = 0;
+
 export default async function DashboardLayout({
   children,
 }: {

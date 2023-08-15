@@ -30,7 +30,7 @@ model Project {
   title String @unique
   type String
   blurb String?
-  markdown String?
+  markdown String? @db.Text
   images Image[]
   technologies Technology[]
   youtube_link String?

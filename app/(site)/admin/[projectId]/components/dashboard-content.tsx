@@ -16,6 +16,15 @@ import { Separator } from '@/components/ui/separator';
 import MDEditor from '@uiw/react-md-editor';
 import { toast } from 'react-hot-toast';
 import { Switch } from '@/components/ui/switch';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 
 export default function DashboardContent({ project }: { project: Project }) {
   const [loading, setLoading] = useState(false);
@@ -95,8 +104,8 @@ export default function DashboardContent({ project }: { project: Project }) {
       toast.dismiss(loadingToast);
       toast.success('Project updated successfully');
 
-      router.refresh();
       router.push(`/admin/${slug}`);
+      router.refresh();
     } catch (error) {
       toast.error('Something went wrong');
       console.log(error);
@@ -145,6 +154,25 @@ export default function DashboardContent({ project }: { project: Project }) {
     }
   };
 
+  const handleOnDelete = async (id: string) => {
+    try {
+      setLoading(true);
+      const loadingToast = toast.loading('Deleting project...');
+
+      await axios.delete(`/api/projects/${id}`);
+
+      toast.dismiss(loadingToast);
+      toast.success('Project Deleted Successfully');
+      router.push('/admin');
+      router.refresh();
+    } catch (error) {
+      toast.error('Something went wrong');
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="border p-4 rounded-sm mb-12 relative">
       {/* Header */}
@@ -163,6 +191,41 @@ export default function DashboardContent({ project }: { project: Project }) {
             day: 'numeric',
           })}`}
         </Typography>
+      </div>
+      {/* Delete Project */}
+      <div className="w-full flex justify-end items-center">
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant="destructive" size="sm">
+              Delete Project
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>
+                Are you sure you want to delete project?
+              </DialogTitle>
+              <DialogDescription>
+                This action cannot be undone.
+              </DialogDescription>
+            </DialogHeader>
+
+            <DialogFooter>
+              <Button
+                onClick={() => handleOnDelete(project.id)}
+                variant="destructive"
+                type="button"
+              >
+                Delete
+              </Button>
+              <DialogTrigger asChild>
+                <Button variant="outline" type="button">
+                  Cancel
+                </Button>
+              </DialogTrigger>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
 
       {/* Image Management */}

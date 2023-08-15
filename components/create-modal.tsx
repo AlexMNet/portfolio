@@ -37,6 +37,7 @@ export default function CreateModal() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
@@ -50,13 +51,14 @@ export default function CreateModal() {
       toast.dismiss(loadingToast);
       toast.success('Project created successfully!');
       router.push(`/admin/${res.data.slug}`);
-      console.log(res);
+      router.refresh();
     } catch (error) {
       toast.error('Something went wrong');
       console.log(error);
     } finally {
       createModal.onClose();
       setLoading(false);
+      reset();
     }
   };
 

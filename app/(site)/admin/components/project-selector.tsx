@@ -19,6 +19,7 @@ import {
   PopoverContent,
 } from '@/components/ui/popover';
 import type { Project } from '@/types';
+import useCreateModal from '@/hooks/useCreateModal';
 
 interface ProjectSelectorProps {
   projects: Project[];
@@ -28,6 +29,7 @@ export default function ProjectSelector({ projects }: ProjectSelectorProps) {
   const router = useRouter();
   const params = useParams();
   const [open, setOpen] = useState(false);
+  const createModal = useCreateModal();
 
   const onProjectSelect = (project: Project) => {
     setOpen(false);
@@ -81,10 +83,7 @@ export default function ProjectSelector({ projects }: ProjectSelectorProps) {
             <CommandGroup>
               <CommandItem
                 className="cursor-pointer"
-                // onSelect={() => {
-                //   setOpen(false);
-                //   set modal open
-                // }}
+                onSelect={() => createModal.onOpen()}
               >
                 <Plus className="mr-2 h-5 w-5" />
                 Create Project

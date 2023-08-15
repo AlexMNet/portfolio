@@ -17,6 +17,7 @@ export async function PUT(
     const {
       title,
       slug,
+      published,
       type,
       blurb,
       markdown,
@@ -32,6 +33,7 @@ export async function PUT(
       data: {
         title,
         slug,
+        published,
         type,
         blurb,
         markdown,

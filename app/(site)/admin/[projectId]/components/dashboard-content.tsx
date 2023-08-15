@@ -15,6 +15,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Separator } from '@/components/ui/separator';
 import MDEditor from '@uiw/react-md-editor';
 import { toast } from 'react-hot-toast';
+import { Switch } from '@/components/ui/switch';
 
 export default function DashboardContent({ project }: { project: Project }) {
   const [loading, setLoading] = useState(false);
@@ -41,6 +42,7 @@ export default function DashboardContent({ project }: { project: Project }) {
     github_link: z.string(),
     live_link: z.string(),
     technologies: z.array(z.object({ name: z.string().trim() })),
+    published: z.boolean(),
   });
 
   type FormSchemaType = z.infer<typeof formSchema>;
@@ -67,6 +69,7 @@ export default function DashboardContent({ project }: { project: Project }) {
       title: project.title || '',
       slug: project.slug || '',
       type: project.type || '',
+      published: project.published || false,
       blurb: project.blurb || '',
       markdown: project.markdown || '',
       youtube_link: project.youtube_link || '',
@@ -80,6 +83,7 @@ export default function DashboardContent({ project }: { project: Project }) {
 
   const markdown = watch('markdown');
   const slug = watch('slug');
+  const published = watch('published');
 
   const onSubmit: SubmitHandler<FormSchemaType> = async (data) => {
     try {
@@ -217,6 +221,21 @@ export default function DashboardContent({ project }: { project: Project }) {
         <div className="flex flex-col gap-4 flex-wrap">
           <Typography variant="h6">Project Information</Typography>
           <Separator />
+          {/* Published */}
+          <div className="flex items-center space-x-2">
+            <Switch
+              id="published"
+              checked={published}
+              onCheckedChange={() => setValue('published', !published)}
+            />
+            <Label
+              htmlFor="published"
+              className={`${published ? 'text-green-500' : 'text-red-500'}`}
+            >
+              Published
+            </Label>
+          </div>
+
           {/* Title */}
           <div>
             <Label htmlFor="title">Title</Label>

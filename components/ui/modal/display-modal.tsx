@@ -3,10 +3,11 @@ import { Loader2, X } from 'lucide-react';
 import { Button } from '../button';
 import useCloseOnClickOutside from '@/hooks/useCloseOnClickOutside';
 import { cn } from '@/lib/utils';
+import type { SubmitHandler } from 'react-hook-form';
 
 interface ModalProps {
   body?: React.ReactElement;
-  onSubmit?: () => void;
+  onSubmit?: SubmitHandler<any>;
   onClose: () => void;
   isOpen: boolean;
   title?: string;
@@ -63,12 +64,17 @@ export default function DisplayModal({
         {/* Footer */}
         <div className="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2">
           {onSubmit && (
-            <Button onClick={onSubmit} type="submit">
+            <Button disabled={isLoading} onClick={onSubmit} type="submit">
               Submit
               {isLoading && <Loader2 className="ml-2 animate-spin" />}
             </Button>
           )}
-          <Button onClick={() => onClose()} variant="outline" type="button">
+          <Button
+            disabled={isLoading}
+            onClick={() => onClose()}
+            variant="outline"
+            type="button"
+          >
             Close
           </Button>
         </div>

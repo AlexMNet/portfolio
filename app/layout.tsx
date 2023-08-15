@@ -4,6 +4,7 @@ import { ThemeProvider } from '@/components/theme-provder';
 import AuthProvider from './providers/AuthProvider';
 import ToasterProvider from './providers/ToasterProvider';
 import ProjectModal from '@/components/project-modal';
+import CreateModal from '@/components/create-modal';
 
 export const metadata: Metadata = {
   title: 'Alex Maldonado - Software Engineer',
@@ -22,6 +23,7 @@ export default function RootLayout({
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <ToasterProvider />
             <ProjectModal />
+            <CreateModal />
             {children}
           </ThemeProvider>
         </AuthProvider>

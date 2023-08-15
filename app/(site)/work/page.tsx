@@ -1,12 +1,14 @@
 import { Typography } from '@/components/ui/typography';
 import ProjectGrid from './components/ProjectGrid';
 import prismadb from '@/app/libs/prismadb';
-import { cache } from 'react';
 
 export const revalidate = 0;
 
 export default async function Work() {
   const projects = await prismadb.project.findMany({
+    where: {
+      published: true,
+    },
     include: {
       technologies: true,
       images: true,

@@ -23,6 +23,7 @@
     "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-switch": "^1.0.3",
+    "@sendgrid/mail": "^7.7.0",
     "@types/node": "20.4.3",
     "@types/react": "18.2.15",
     "@types/react-dom": "18.2.7",
@@ -44,6 +45,7 @@
     "postcss": "8.4.27",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-google-recaptcha": "^3.1.0",
     "react-hook-form": "^7.45.2",
     "react-hot-toast": "^2.4.1",
     "react-markdown": "^8.0.7",
@@ -58,6 +60,7 @@
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
     "@types/bcrypt": "^5.0.0",
+    "@types/react-google-recaptcha": "^2.1.5",
     "prisma": "^5.0.0"
   }
 }

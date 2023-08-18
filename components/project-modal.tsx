@@ -28,7 +28,7 @@ export default function ProjectModal() {
         {images.length > 0 ? (
           <img
             className="w-full object-cover rounded-lg aspect-video"
-            src={images[0].src}
+            src={images[1].src}
             alt={`${title} image`}
           />
         ) : (
@@ -74,14 +74,14 @@ export default function ProjectModal() {
             </ReactMarkdown>
           </div>
         )}
-        <div className="mt-2">
+        {/* <div className="mt-2">
           <Typography>Technologies:</Typography>
           <ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
             {technologies.map(({ id, name }: { id: string; name: string }) => (
               <li key={id}>{name}</li>
             ))}
           </ul>
-        </div>
+        </div> */}
       </div>
     </div>
   );

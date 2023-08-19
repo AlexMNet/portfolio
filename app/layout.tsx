@@ -3,8 +3,10 @@ import type { Metadata } from 'next';
 import { ThemeProvider } from '@/components/theme-provder';
 import AuthProvider from './providers/AuthProvider';
 import ToasterProvider from './providers/ToasterProvider';
+import NextTopLoader from 'nextjs-toploader';
 import ProjectModal from '@/components/project-modal';
 import CreateModal from '@/components/create-modal';
+import ContactModal from '@/components/contact-modal';
 
 export const metadata: Metadata = {
   title: 'Alex Maldonado - Software Engineer',
@@ -24,6 +26,8 @@ export default function RootLayout({
             <ToasterProvider />
             <ProjectModal />
             <CreateModal />
+            <ContactModal />
+            <NextTopLoader />
             {children}
           </ThemeProvider>
         </AuthProvider>

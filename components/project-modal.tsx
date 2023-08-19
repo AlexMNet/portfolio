@@ -74,14 +74,6 @@ export default function ProjectModal() {
             </ReactMarkdown>
           </div>
         )}
-        {/* <div className="mt-2">
-          <Typography>Technologies:</Typography>
-          <ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
-            {technologies.map(({ id, name }: { id: string; name: string }) => (
-              <li key={id}>{name}</li>
-            ))}
-          </ul>
-        </div> */}
       </div>
     </div>
   );

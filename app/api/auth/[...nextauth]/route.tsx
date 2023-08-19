@@ -2,6 +2,7 @@ import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import NextAuth, { AuthOptions } from 'next-auth';
 import prisma from '@/app/libs/prismadb';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import GitHubProvider from 'next-auth/providers/github';
 import bcrypt from 'bcrypt';
 
 export const authOptions: AuthOptions = {
@@ -11,6 +12,10 @@ export const authOptions: AuthOptions = {
     error: '/auth/signin',
   },
   providers: [
+    GitHubProvider({
+      clientId: process.env.GITHUB_ID as string,
+      clientSecret: process.env.GITHUB_SECRET as string,
+    }),
     CredentialsProvider({
       name: 'credentials',
       credentials: {
@@ -51,7 +56,8 @@ export const authOptions: AuthOptions = {
           throw new Error('Invalid credentials');
         }
 
-        return user;
+        //Look into this causing an error with authorize
+        return user as any;
       },
     }),
   ],
@@ -60,8 +66,26 @@ export const authOptions: AuthOptions = {
   session: {
     strategy: 'jwt',
   },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.role = user.role;
+      }
+      console.log('TOKEN', token);
+      return token;
+    },
+    session({ session, token }) {
+      if (session.user) {
+        session.user.role = token.role;
+      }
+      console.log('SESSION', session);
+      return session;
+    },
+  },
   secret: process.env.NEXTAUTH_SECRET,
 };
 
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
+
+// https://stackoverflow.com/questions/74089665/next-auth-credentials-provider-authorize-type-error

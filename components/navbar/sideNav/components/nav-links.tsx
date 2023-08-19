@@ -1,5 +1,4 @@
 'use client';
-
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Typography } from '@/components/ui/typography';
@@ -31,7 +30,7 @@ export default function NavLinks() {
             </Button>
           </li>
         ))}
-        {session?.user && (
+        {session?.user.role === 'admin' && (
           <>
             <li>
               <Button variant="link" size="lg" asChild>

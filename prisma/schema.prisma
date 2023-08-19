@@ -17,10 +17,22 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   image         String?
+  role          String?  @default("user")
   accounts      Account[]
   sessions      Session[]
 
   @@map("users")
+}
+
+
+
+model GuestMessage {
+  id String @id @default(cuid())
+  name String
+  message String
+  email String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Project {
@@ -39,8 +51,6 @@ model Project {
   published Boolean @default(false)
   updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
-
-
 }
 
 model Technology {

@@ -71,14 +71,12 @@ export const authOptions: AuthOptions = {
       if (user) {
         token.role = user.role;
       }
-      console.log('TOKEN', token);
       return token;
     },
     session({ session, token }) {
       if (session.user) {
         session.user.role = token.role;
       }
-      console.log('SESSION', session);
       return session;
     },
   },

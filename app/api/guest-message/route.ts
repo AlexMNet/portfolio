@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import prismadb from '@/app/libs/prismadb';
+import filter from 'leo-profanity';
 
 export async function GET(req: Request, res: Response) {
   try {
@@ -17,10 +18,12 @@ export async function POST(req: Request, res: Response) {
     const body = await req.json();
     const { name, message, email } = body;
 
+    const filteredMessage = filter.clean(message);
+
     const guestMessage = await prismadb.guestMessage.create({
       data: {
         name,
-        message,
+        message: filteredMessage,
         email,
       },
     });

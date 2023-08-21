@@ -19,7 +19,6 @@ export interface Project {
   images: {
     id: string;
     src: string;
-    type: 'modal' | 'card';
     projectId: string;
     public_id: string;
   }[];

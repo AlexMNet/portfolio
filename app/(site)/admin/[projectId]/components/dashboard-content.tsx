@@ -25,10 +25,18 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import SortableList, { SortableItem } from 'react-easy-sort';
+import arrayMove from 'array-move';
 
 export default function DashboardContent({ project }: { project: Project }) {
   const [loading, setLoading] = useState(false);
+  const [editingImageOrder, setEditingImageOrder] = useState(false);
+  const [images, setImages] = useState(project.images);
   const router = useRouter();
+
+  useEffect(() => {
+    setImages(project.images);
+  }, [project.images]);
 
   const formSchema = z.object({
     title: z
@@ -139,7 +147,6 @@ export default function DashboardContent({ project }: { project: Project }) {
       const uploadedImage = {
         src: image.url,
         public_id: image.public_id,
-        type: 'modal',
       };
 
       await axios.post(`/api/images`, {
@@ -171,6 +178,29 @@ export default function DashboardContent({ project }: { project: Project }) {
     } finally {
       setLoading(false);
     }
+  };
+
+  const onSortEnd = (oldIndex: number, newIndex: number) => {
+    setImages((array) => arrayMove(array, oldIndex, newIndex));
+    setEditingImageOrder(true);
+  };
+
+  const handleNewOrder = async () => {
+    try {
+      setLoading(true);
+      await axios.put(`/api/images/${project.id}`, { images });
+      setEditingImageOrder(false);
+      router.refresh();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const cancelImageOrder = () => {
+    setImages(project.images);
+    setEditingImageOrder(false);
   };
 
   return (
@@ -230,27 +260,37 @@ export default function DashboardContent({ project }: { project: Project }) {
 
       {/* Image Management */}
       <div className="flex gap-4 flex-wrap mb-6">
-        {project.images.map((image) => (
-          <div
-            key={image.id}
-            className={`relative ${loading ? 'animate-pulse' : ''}`}
-          >
-            <img
-              className="w-32 h-32 object-cover rounded-md"
-              src={image.src}
-              alt=""
-            />
-            <Button
-              disabled={loading}
-              variant="destructive"
-              size="icon"
-              className="top-0 absolute right-0 w-6 h-6"
-              onClick={() => handleOnImageDelete(image.id)}
-            >
-              <X size={18} />
-            </Button>
-          </div>
-        ))}
+        <SortableList
+          onSortEnd={onSortEnd}
+          className="flex gap-4 flex-wrap"
+          draggedItemClassName="dragged"
+        >
+          {images.map((image, idx) => (
+            <SortableItem key={image.id}>
+              <div className={`relative ${loading ? 'animate-pulse' : ''}`}>
+                <img
+                  draggable={false}
+                  className="w-32 h-32 object-cover rounded-md"
+                  src={image.src}
+                  alt=""
+                />
+                <Button
+                  disabled={loading}
+                  variant="destructive"
+                  size="icon"
+                  className="top-0 absolute right-0 w-6 h-6"
+                  onClick={() => handleOnImageDelete(image.id)}
+                >
+                  <X size={18} />
+                </Button>
+                <small>
+                  {idx === 0 ? 'Card Image' : idx === 1 ? 'Modal Image' : ''}
+                </small>
+              </div>
+            </SortableItem>
+          ))}
+        </SortableList>
+
         <CldUploadWidget
           onUpload={(result: any) => handleOnImageUpload(result.info)}
           uploadPreset="emwnhvxf"
@@ -277,6 +317,18 @@ export default function DashboardContent({ project }: { project: Project }) {
             );
           }}
         </CldUploadWidget>
+        {editingImageOrder && (
+          <div className="flex flex-col">
+            <Button variant="link" onClick={handleNewOrder}>
+              {loading ? 'Saving...' : 'Save image order'}
+            </Button>
+            {!loading && (
+              <Button variant="link" onClick={cancelImageOrder}>
+                Cancel
+              </Button>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Form */}

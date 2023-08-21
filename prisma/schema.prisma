@@ -63,18 +63,12 @@ model Image {
   id String @id @default(cuid())
   projectId String @map("project_id")
   src String 
-  type ImageType
   public_id String
   project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
-
 
   @@index([projectId])
 }
 
-enum ImageType {
-  modal
-  card
-}
 
 model Account {
   id                 String  @id @default(cuid())

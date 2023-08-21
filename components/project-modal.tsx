@@ -25,7 +25,7 @@ export default function ProjectModal() {
   const body = (
     <div className="flex flex-col w-full px-4 mt-4">
       <div>
-        {images.length > 0 ? (
+        {images[1] ? (
           <img
             className="w-full object-cover rounded-lg aspect-video"
             src={images[1].src}

@@ -270,7 +270,7 @@ export default function DashboardContent({ project }: { project: Project }) {
               <div className={`relative ${loading ? 'animate-pulse' : ''}`}>
                 <img
                   draggable={false}
-                  className="w-32 h-32 object-cover rounded-md"
+                  className="w-32 h-32 object-cover rounded-md cursor-pointer"
                   src={image.src}
                   alt=""
                 />

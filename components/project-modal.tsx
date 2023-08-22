@@ -88,7 +88,10 @@ export default function ProjectModal() {
         </div>
         {markdown && (
           <div className="mt-2">
-            <ReactMarkdown className="prose dark:prose-invert">
+            <ReactMarkdown
+              className="prose dark:prose-invert"
+              linkTarget="_blank"
+            >
               {markdown}
             </ReactMarkdown>
           </div>

@@ -7,6 +7,7 @@ import NextTopLoader from 'nextjs-toploader';
 import ProjectModal from '@/components/project-modal';
 import CreateModal from '@/components/create-modal';
 import ContactModal from '@/components/contact-modal';
+import ReorderModal from '@/components/reorder-modal';
 
 export const metadata: Metadata = {
   title: 'Alex Maldonado - Software Engineer',
@@ -27,6 +28,7 @@ export default function RootLayout({
             <ProjectModal />
             <CreateModal />
             <ContactModal />
+            <ReorderModal />
             <NextTopLoader />
             {children}
           </ThemeProvider>

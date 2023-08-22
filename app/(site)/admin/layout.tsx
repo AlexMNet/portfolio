@@ -14,6 +14,9 @@ export default async function DashboardLayout({
       technologies: true,
       images: true,
     },
+    orderBy: {
+      position: 'asc',
+    },
   });
 
   return (

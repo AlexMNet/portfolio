@@ -30,12 +30,15 @@ export async function POST(req: Request, res: Response) {
     const { title, slug, type } = body;
     const { id } = currentUser.currentUser;
 
+    const count = await prismadb.project.count();
+
     const project = await prismadb.project.create({
       data: {
         userId: id,
         title,
         slug,
         type,
+        position: count + 1,
       },
     });
 

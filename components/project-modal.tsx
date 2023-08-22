@@ -1,36 +1,55 @@
 'use client';
+import { useState } from 'react';
 import useProjectModal from '@/hooks/useProjectModal';
 import { DisplayModal } from './ui/modal';
 import { Typography } from './ui/typography';
 import { Button } from './ui/button';
-import { ExternalLink, Github, ImageOff } from 'lucide-react';
+import { Expand, ExternalLink, Github, ImageOff } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
+import Lightbox from 'yet-another-react-lightbox';
+import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
+import 'yet-another-react-lightbox/styles.css';
+import 'yet-another-react-lightbox/plugins/thumbnails.css';
 
 export default function ProjectModal() {
   const { data, isOpen, onClose } = useProjectModal();
+  const [open, setOpen] = useState(false);
 
   if (!isOpen) return null;
   if (!data) return null;
 
-  const {
-    title,
-    markdown,
-    github_link,
-    live_link,
-    technologies,
-    images,
-    type,
-  } = data;
+  const { title, markdown, github_link, live_link, images, type } = data;
+
+  const lightBoxImages = images.map((image) => ({
+    src: image.src,
+  }));
 
   const body = (
     <div className="flex flex-col w-full px-4 mt-4">
+      <Lightbox
+        open={open}
+        close={() => setOpen(false)}
+        slides={lightBoxImages}
+        plugins={[Thumbnails]}
+        carousel={{ finite: true }}
+      />
       <div>
         {images[1] ? (
-          <img
-            className="w-full object-cover rounded-lg aspect-video"
-            src={images[1].src}
-            alt={`${title} image`}
-          />
+          <button
+            onClick={() => setOpen(true)}
+            className="flex flex-col gap-[1px]"
+          >
+            <img
+              className="w-full object-cover rounded-lg aspect-video"
+              src={images[1].src}
+              alt={`${title} image`}
+            />
+            <div className="flex items-center justify-end text-xs text-gray-400 rounded-b-lg w-full">
+              <Expand size={10} className="inline mr-1" />
+              {lightBoxImages.length}{' '}
+              {lightBoxImages.length > 1 ? 'images' : 'image'}
+            </div>
+          </button>
         ) : (
           <div className="w-full rounded-lg aspect-video bg-gray-500 flex flex-col items-center justify-center">
             <ImageOff size={100} />

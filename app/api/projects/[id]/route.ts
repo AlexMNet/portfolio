@@ -43,7 +43,7 @@ export async function PUT(
         github_link,
         live_link,
         technologies: {
-          deleteMany: {},
+          set: [],
           connectOrCreate: technologies.map((tech: { name: string }) => {
             return {
               where: { name: tech.name },
@@ -103,6 +103,30 @@ export async function DELETE(
       const imagePublicIds = images.map((image) => image.public_id);
 
       await cloudinary.api.delete_resources(imagePublicIds);
+    }
+
+    //Update position of projects
+    const projectToUpdate = await prismadb.project.findMany({
+      where: {
+        position: {
+          gt: deletedProject.position,
+        },
+      },
+    });
+
+    if (projectToUpdate.length > 0) {
+      for (let i = 0; i < projectToUpdate.length; i++) {
+        const project = projectToUpdate[i];
+
+        await prismadb.project.update({
+          where: {
+            id: project.id,
+          },
+          data: {
+            position: project.position - 1,
+          },
+        });
+      }
     }
 
     return NextResponse.json(deletedProject);

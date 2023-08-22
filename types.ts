@@ -12,6 +12,7 @@ export interface Project {
   published: boolean;
   updatedAt: Date;
   createdAt: Date;
+  position: number;
   technologies: {
     id: string;
     name: string;

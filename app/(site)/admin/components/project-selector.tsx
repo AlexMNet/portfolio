@@ -12,7 +12,7 @@ import {
   CommandSeparator,
 } from '@/components/ui/command';
 
-import { Check, ChevronsUpDown, Plus } from 'lucide-react';
+import { ArrowUpDown, Check, ChevronsUpDown, Plus } from 'lucide-react';
 import {
   Popover,
   PopoverTrigger,
@@ -20,6 +20,7 @@ import {
 } from '@/components/ui/popover';
 import type { Project } from '@/types';
 import useCreateModal from '@/hooks/useCreateModal';
+import useReorderModal from '@/hooks/useReorderModal';
 
 interface ProjectSelectorProps {
   projects: Project[];
@@ -29,7 +30,9 @@ export default function ProjectSelector({ projects }: ProjectSelectorProps) {
   const router = useRouter();
   const params = useParams();
   const [open, setOpen] = useState(false);
+  const [currentSelectedProject, setCurrentSelectedProject] = useState('');
   const createModal = useCreateModal();
+  const reorderModal = useReorderModal();
 
   const onProjectSelect = (project: Project) => {
     setOpen(false);
@@ -87,6 +90,13 @@ export default function ProjectSelector({ projects }: ProjectSelectorProps) {
               >
                 <Plus className="mr-2 h-5 w-5" />
                 Create Project
+              </CommandItem>
+              <CommandItem
+                className="cursor-pointer"
+                onSelect={() => reorderModal.onEdit(projects)}
+              >
+                <ArrowUpDown className="mr-2 h-5 w-5" />
+                Reorder Projects
               </CommandItem>
             </CommandGroup>
           </CommandList>

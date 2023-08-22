@@ -13,7 +13,11 @@ export default async function Work() {
       technologies: true,
       images: true,
     },
+    orderBy: {
+      position: 'asc',
+    },
   });
+
   return (
     <div className="pb-10">
       <div className="max-w-7xl w-full mx-auto px-6">

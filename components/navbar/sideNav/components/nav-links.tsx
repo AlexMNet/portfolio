@@ -35,7 +35,7 @@ export default function NavLinks() {
             <li>
               <Button variant="link" size="lg" asChild>
                 <Link
-                  href={'/admin'}
+                  href="/admin"
                   className={pathname.startsWith('/admin') ? 'underline' : ''}
                 >
                   <Typography variant="largeText">Admin</Typography>

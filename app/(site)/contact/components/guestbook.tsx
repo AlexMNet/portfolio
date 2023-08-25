@@ -121,17 +121,17 @@ export default function Guestbook() {
           </Button>
         )}
         {session?.user && (
-          <div className="flex flex-col items-start justify-center">
+          <div className="flex flex-col items-start justify-center max-w-lg">
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="flex items-start justify-start gap-1 w-full"
+                className="flex items-start justify-start gap-1 w-full "
               >
                 <FormField
                   control={form.control}
                   name="message"
                   render={({ field }) => (
-                    <FormItem className="w-1/3">
+                    <FormItem className="flex-1">
                       <FormControl>
                         <Input placeholder="type a message" {...field} />
                       </FormControl>
@@ -156,31 +156,48 @@ export default function Guestbook() {
           </div>
         )}
         <Separator />
-        <ScrollArea className="mt-6 h-72">
+        <ScrollArea className="mt-6 h-[650px] max-w-lg">
           {messages?.map(
             ({
               id,
               name,
               message,
               email,
+              createdAt,
             }: {
               id: string;
               name: string;
               message: string;
               email: string;
+              createdAt: string;
             }) => (
-              <div key={id} className="flex gap-2 items-center">
-                <div className="font-semibold">{name}:</div>
-                <div className="font-thin">{message}</div>
-                {session?.user?.email === email && (
-                  <Button
-                    onClick={() => deleteMessage(id)}
-                    size="icon"
-                    variant="ghost"
+              <div
+                key={id}
+                className="p-2 dark:bg-neutral-900 bg-gray-200 rounded-md max-w-lg my-4"
+              >
+                <div className="text-sm mb-1 flex items-center gap-1">
+                  <Typography variant="smallText" weight="bold">
+                    {name}
+                  </Typography>
+                  <div> • </div>
+                  <Typography variant="xsText" weight="light">
+                    {new Date(createdAt).toLocaleDateString('en-US', {
+                      day: '2-digit',
+                      year: '2-digit',
+                      month: 'long',
+                      weekday: 'short',
+                    })}
+                  </Typography>
+                </div>
+                <div>
+                  <Typography
+                    variant="smallText"
+                    weight="light"
+                    className="m-0 font-thin"
                   >
-                    <Trash className="w-4 h-4 stroke-red-500" />
-                  </Button>
-                )}
+                    {message}
+                  </Typography>
+                </div>
               </div>
             )
           )}

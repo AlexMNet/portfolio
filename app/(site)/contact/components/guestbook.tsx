@@ -188,6 +188,11 @@ export default function Guestbook() {
                       weekday: 'short',
                     })}
                   </Typography>
+                  {session?.user?.email === email && (
+                    <button onClick={() => deleteMessage(id)}>
+                      <Trash className="w3 h-3 stroke-red-500" />
+                    </button>
+                  )}
                 </div>
                 <div>
                   <Typography

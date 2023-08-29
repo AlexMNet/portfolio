@@ -10,7 +10,7 @@ export default function PersonCard() {
         Alex Maldonado
       </Typography>
       <Typography variant="smallText" className="text-gray-400 text-center">
-        FullStack Software Developer
+        Software Engineer
       </Typography>
       <ul role="list" className="mt-4 flex justify-center">
         <li>

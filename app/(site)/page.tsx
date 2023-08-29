@@ -12,7 +12,7 @@ export default function Home() {
           >
             👋🏾 I am a{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-green-500">
-              Software Developer
+              Software Engineer
             </span>{' '}
             based in Southern California.
           </Typography>
@@ -23,7 +23,7 @@ export default function Home() {
           >
             As a former touring musician, I have always had a passion for
             creating and building experiences. I have transferred that passion
-            into software development!
+            into software engineering!
           </Typography>
           <Typography
             variant="p"

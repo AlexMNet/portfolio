@@ -8,6 +8,7 @@ import ProjectModal from '@/components/project-modal';
 import CreateModal from '@/components/create-modal';
 import ContactModal from '@/components/contact-modal';
 import ReorderModal from '@/components/reorder-modal';
+import { Analytics } from '@vercel/analytics/react';
 
 export const metadata: Metadata = {
   title: 'Alex Maldonado - Software Engineer',
@@ -41,6 +42,7 @@ export default function RootLayout({
             <ContactModal />
             <ReorderModal />
             <NextTopLoader />
+            <Analytics />
             {children}
           </ThemeProvider>
         </AuthProvider>

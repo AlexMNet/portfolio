@@ -12,6 +12,17 @@ import ReorderModal from '@/components/reorder-modal';
 export const metadata: Metadata = {
   title: 'Alex Maldonado - Software Engineer',
   description: 'Software Engineer based in Southern California',
+  openGraph: {
+    title: 'Alex Maldonado - Software Engineer',
+    description: 'Software Engineer based in Southern California',
+    images: [
+      {
+        url: 'https://res.cloudinary.com/dtbtmmgxx/image/upload/v1692226021/android-chrome-192x192_rr1vkd.png',
+        width: 192,
+        height: 192,
+      },
+    ],
+  },
 };
 
 export default function RootLayout({

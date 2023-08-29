@@ -62,7 +62,7 @@ export default function DisplayModal({
           {body}
         </div>
         {/* Footer */}
-        <div className="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2">
+        <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-3">
           {onSubmit && (
             <Button disabled={isLoading} onClick={onSubmit} type="submit">
               Submit

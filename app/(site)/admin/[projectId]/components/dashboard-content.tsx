@@ -206,7 +206,7 @@ export default function DashboardContent({ project }: { project: Project }) {
   return (
     <div className="border p-4 rounded-sm mb-12 relative">
       {/* Header */}
-      <div className="mb-6 flex justify-between items-center">
+      <div className="mb-6 flex flex-col sm:flex-row justify-between items-center text-center">
         <Typography variant="h5" className="mb-2">
           {project.title}
         </Typography>
@@ -221,41 +221,6 @@ export default function DashboardContent({ project }: { project: Project }) {
             day: 'numeric',
           })}`}
         </Typography>
-      </div>
-      {/* Delete Project */}
-      <div className="w-full flex justify-end items-center">
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button variant="destructive" size="sm">
-              Delete Project
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
-            <DialogHeader>
-              <DialogTitle>
-                Are you sure you want to delete project?
-              </DialogTitle>
-              <DialogDescription>
-                This action cannot be undone.
-              </DialogDescription>
-            </DialogHeader>
-
-            <DialogFooter>
-              <Button
-                onClick={() => handleOnDelete(project.id)}
-                variant="destructive"
-                type="button"
-              >
-                Delete
-              </Button>
-              <DialogTrigger asChild>
-                <Button variant="outline" type="button">
-                  Cancel
-                </Button>
-              </DialogTrigger>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
       </div>
 
       {/* Image Management */}
@@ -450,7 +415,39 @@ export default function DashboardContent({ project }: { project: Project }) {
             </Button>
           </div>
 
-          <div className="mt-6 flex items-center justify-end">
+          <div className="mt-6 flex items-center justify-end gap-2">
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="destructive" size="sm">
+                  Delete Project
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[425px]">
+                <DialogHeader>
+                  <DialogTitle>
+                    Are you sure you want to delete project?
+                  </DialogTitle>
+                  <DialogDescription>
+                    This action cannot be undone.
+                  </DialogDescription>
+                </DialogHeader>
+
+                <DialogFooter>
+                  <Button
+                    onClick={() => handleOnDelete(project.id)}
+                    variant="destructive"
+                    type="button"
+                  >
+                    Delete
+                  </Button>
+                  <DialogTrigger asChild>
+                    <Button variant="outline" type="button">
+                      Cancel
+                    </Button>
+                  </DialogTrigger>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
             <div>
               <Button disabled={loading} type="submit">
                 Save

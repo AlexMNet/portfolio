@@ -17,9 +17,9 @@ export const metadata: Metadata = {
     description: 'Software Engineer based in Southern California',
     images: [
       {
-        url: 'https://res.cloudinary.com/dtbtmmgxx/image/upload/v1692226021/android-chrome-192x192_rr1vkd.png',
-        width: 192,
-        height: 192,
+        url: 'https://res.cloudinary.com/dtbtmmgxx/image/upload/v1693279916/studio-1df714aaf2b9449bf14e57f2b10b417a-pwgmceuf_oe60qm.jpg',
+        width: 1200,
+        height: 600,
       },
     ],
   },

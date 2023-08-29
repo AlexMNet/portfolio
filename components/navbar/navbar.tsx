@@ -1,6 +1,7 @@
 'use client';
 import { ModeToggle } from '../mode-toggle';
 
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { Typography } from '../ui/typography';
@@ -31,10 +32,10 @@ export function Navbar() {
       )}
       <div className="mx-auto w-full px-4 py-2 ">
         <nav className="flex items-center justify-between">
-          <div className="flex items-center space-x-2 md:hidden">
+          <Link href="/" className="flex items-center space-x-2 md:hidden">
             <div className="font-mono">AlexMaldonado.DEV </div>
             <div className="rounded-full h-4 w-4 dark:bg-blue-500 bg-black inline-block align-middle animate-pulse"></div>
-          </div>
+          </Link>
           <div className="flex items-center md:ml-auto">
             <ModeToggle />
             <div className="md:hidden">

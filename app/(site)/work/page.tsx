@@ -2,7 +2,7 @@ import { Typography } from '@/components/ui/typography';
 import ProjectGrid from './components/ProjectGrid';
 import prismadb from '@/app/libs/prismadb';
 
-export const revalidate = 0;
+export const revalidate = 10;
 
 export default async function Work() {
   const projects = await prismadb.project.findMany({

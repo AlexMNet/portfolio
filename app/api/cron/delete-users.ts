@@ -2,7 +2,7 @@ import prismadb from '@/app/libs/prismadb';
 import { sendCronDeleteUsersEmail } from '@/app/libs/sendEmail';
 import { NextResponse } from 'next/server';
 
-export async function DELETE(req: Request, res: Response) {
+export async function GET(req: Request, res: Response) {
   try {
     const users = await prismadb.user.findMany({
       where: {

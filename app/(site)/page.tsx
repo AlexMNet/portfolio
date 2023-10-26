@@ -1,4 +1,5 @@
 import { Typography } from '@/components/ui/typography';
+import { Button } from '@/components/ui/button';
 
 export default function Home() {
   return (
@@ -31,7 +32,7 @@ export default function Home() {
             className="dark:text-gray-300 text-gray-700"
           >
             I currently work fulltime building new and maintaining existing
-            React/Next.js applications for Sandals Church.
+            React/Next.js applications for Sandals Church and work for Code Drips a web dev agency on React/Gatsby/GraphQL projects. 
           </Typography>
         </article>
         <div>

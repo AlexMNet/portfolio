@@ -1,5 +1,6 @@
 import { Typography } from '@/components/ui/typography';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export default function Home() {
   return (

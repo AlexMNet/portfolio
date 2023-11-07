@@ -31,7 +31,7 @@ export default function Home() {
             className="dark:text-gray-300 text-gray-700"
           >
             I currently work fulltime building new and maintaining existing
-            React/Next.js applications for Sandals Church.
+            React/Next.js applications for Sandals Church as well as work for a software development agency called CodeDrips where I work with Gatsby, GraphQL and wordpress.
           </Typography>
         </article>
         <div>

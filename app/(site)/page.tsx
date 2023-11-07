@@ -1,8 +1,10 @@
 import { Typography } from '@/components/ui/typography';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export default function Home() {
   return (
-    <section>
+    <section className='mb-6'>
       <div className="flex flex-col-reverse lg:flex-row items-center lg:items-start lg:mt-32 justify-end mt-12 lg:justify-center text-center lg:text-start px-6 gap-4 lg:gap-0">
         <article className="max-w-2xl flex items-center justify-center flex-col">
           <Typography
@@ -31,8 +33,13 @@ export default function Home() {
             className="dark:text-gray-300 text-gray-700"
           >
             I currently work fulltime building new and maintaining existing
-            React/Next.js applications for Sandals Church.
+            React/Next.js applications for Sandals Church as well as work on React/Gatsby/GraphQL applications for a web dev agency called CodeDrips. 
           </Typography>
+          <div className="md:hidden self-center mt-6 text-xl">
+            <Button asChild variant="default">
+              <Link href="/work">See My Work</Link>
+            </Button>
+          </div>
         </article>
         <div>
           <div className="rounded-full overflow-hidden relative w-52 h-52 lg:w-72 lg:h-72 xl:h-96 xl:w-96 ring ring-black">

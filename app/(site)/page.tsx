@@ -1,4 +1,8 @@
+import { Button } from '@/components/ui/button';
 import { Typography } from '@/components/ui/typography';
+import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
+import { buttonVariants } from '@/components/ui/button';
 
 export default function Home() {
   return (
@@ -21,18 +25,29 @@ export default function Home() {
             weight="light"
             className="dark:text-gray-300 text-gray-700"
           >
-            As a former touring musician, I have always had a passion for
-            creating and building experiences. I have transferred that passion
-            into software engineering!
+            In my past life, I toured as a musician, where I honed my skills in
+            creating and building unique experiences. Now, I&apos;ve seamlessly
+            transitioned that passion into software engineering!
           </Typography>
           <Typography
             variant="p"
             weight="light"
             className="dark:text-gray-300 text-gray-700"
           >
-            I currently work fulltime building new and maintaining existing
-            React/Next.js applications for Sandals Church as well as work for a software development agency called CodeDrips where I work with Gatsby, GraphQL and wordpress.
+            Currently, I&apos;m immersed in the world of React/Next.js
+            applications at Sandals Church, crafting new experiences and
+            maintaining existing ones. Additionally, I contribute my skills to
+            CodeDrips, a software development agency, where I delve into
+            projects using Gatsby, GraphQL, and WordPress.
           </Typography>
+          <div className="self-center lg:self-start mt-6">
+            <Link
+              href="/work"
+              className={buttonVariants({ variant: 'primary', size: 'sm' })}
+            >
+              See My Work <ArrowRight className="ml-2" />
+            </Link>
+          </div>
         </article>
         <div>
           <div className="rounded-full overflow-hidden relative w-52 h-52 lg:w-72 lg:h-72 xl:h-96 xl:w-96 ring ring-black">

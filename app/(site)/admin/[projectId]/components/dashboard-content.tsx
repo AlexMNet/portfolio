@@ -214,7 +214,7 @@ export default function DashboardContent({ project }: { project: Project }) {
           variant="smallText"
           className="mb-2 dark:text-gray-400 text-gray-600"
         >
-          {`last updated: ${project.createdAt.toLocaleTimeString('en-us', {
+          {`last updated: ${project.updatedAt.toLocaleTimeString('en-us', {
             weekday: 'long',
             year: 'numeric',
             month: 'short',

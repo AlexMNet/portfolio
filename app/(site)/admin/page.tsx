@@ -4,7 +4,11 @@ import { Frown } from 'lucide-react';
 import { redirect } from 'next/navigation';
 
 export default async function Index() {
-  const projects = await prismadb.project.findMany({});
+  const projects = await prismadb.project.findMany({
+    orderBy: {
+      updatedAt: 'desc',
+    },
+  });
 
   if (projects.length > 0) {
     redirect(`/admin/${projects[0].slug}`);

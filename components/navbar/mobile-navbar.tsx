@@ -22,6 +22,7 @@ import {
   NavigationMenuLink,
   navigationMenuTriggerStyle,
 } from '../ui/navigation-menu';
+import { Spotify } from '../spotify';
 import type { Session } from 'next-auth';
 import type { Links } from './navbar';
 
@@ -41,7 +42,7 @@ export function MobileNavbar({ session, pathname, links }: MobileNavbarProps) {
           <Menu size={24} />
         </Button>
       </SheetTrigger>
-      <SheetContent side="right">
+      <SheetContent side="right" className="w-full">
         <SheetHeader>
           <SheetTitle>AlexMaldonado.dev</SheetTitle>
         </SheetHeader>
@@ -91,6 +92,9 @@ export function MobileNavbar({ session, pathname, links }: MobileNavbarProps) {
               )}
             </NavigationMenuList>
           </NavigationMenu>
+        </div>
+        <div className="mt-10">
+          <Spotify />
         </div>
       </SheetContent>
     </Sheet>

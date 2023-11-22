@@ -3,6 +3,7 @@ import { Typography } from '@/components/ui/typography';
 import useProjectModal from '@/hooks/useProjectModal';
 import { Project } from '@/types';
 import { ImageOff } from 'lucide-react';
+import Image from 'next/image';
 
 export interface ProjectGridProps {
   projects: Project[];
@@ -23,10 +24,13 @@ export default function ProjectGrid({ projects }: ProjectGridProps) {
           <div className="max-w-sm">
             <div className="rounded-sm">
               {project.images[0] ? (
-                <img
+                <Image
                   className="aspect-[4/5] w-full h-full rounded-sm object-cover opacity-80 hover:opacity-100 transition-all duration-300 ease-in-out"
                   src={project.images[0].src}
                   alt="Work"
+                  width={1080}
+                  height={720}
+                  priority
                 />
               ) : (
                 <div className="aspect-[4/5] w-full h-full rounded-sm bg-gray-500 flex flex-col items-center justify-center">

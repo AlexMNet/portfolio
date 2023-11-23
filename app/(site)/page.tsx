@@ -43,7 +43,7 @@ export default function Home() {
           <div className="self-center lg:self-start mt-6">
             <Link
               href="/work"
-              className={buttonVariants({ variant: 'primary', size: 'sm' })}
+              className={buttonVariants({ variant: 'default', size: 'sm' })}
             >
               See My Work <ArrowRight className="ml-2" />
             </Link>

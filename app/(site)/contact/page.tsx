@@ -3,7 +3,7 @@ import Guestbook from './components/guestbook';
 
 export default function Contact() {
   return (
-    <div className="max-w-7xl w-full mx-auto px-6 ">
+    <div className="animate-fade-up max-w-7xl w-full mx-auto px-6 ">
       <div className="">
         <Typography
           variant="h3"

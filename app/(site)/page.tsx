@@ -7,7 +7,7 @@ import { buttonVariants } from '@/components/ui/button';
 export default function Home() {
   return (
     <section>
-      <div className="flex flex-col-reverse lg:flex-row items-center lg:items-start lg:mt-32 justify-end mt-12 lg:justify-center text-center lg:text-start px-6 gap-4 lg:gap-0">
+      <div className="animate-fade-up flex flex-col-reverse lg:flex-row items-center lg:items-start lg:mt-32 justify-end mt-12 lg:justify-center text-center lg:text-start px-6 gap-4 lg:gap-0">
         <article className="max-w-2xl flex items-center justify-center flex-col">
           <Typography
             variant="h1"

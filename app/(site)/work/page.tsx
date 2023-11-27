@@ -19,7 +19,7 @@ export default async function Work() {
   });
 
   return (
-    <div className="pb-10">
+    <div className="animate-fade-up pb-10">
       <div className="max-w-7xl w-full mx-auto px-6">
         <div className="">
           <Typography

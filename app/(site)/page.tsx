@@ -29,17 +29,7 @@ export default function Home() {
             creating and building unique experiences. Now, I&apos;ve seamlessly
             transitioned that passion into software engineering!
           </Typography>
-          <Typography
-            variant="p"
-            weight="light"
-            className="dark:text-gray-300 text-gray-700"
-          >
-            Currently, I&apos;m immersed in the world of React/Next.js
-            applications at Sandals Church, crafting new experiences and
-            maintaining existing ones. Additionally, I contribute my skills to
-            CodeDrips, a software development agency, where I delve into
-            projects using Gatsby, GraphQL, and WordPress.
-          </Typography>
+
           <div className="self-center lg:self-start mt-6">
             <Link
               href="/work"
